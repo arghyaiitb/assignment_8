@@ -132,22 +132,79 @@ Key milestones during training:
 
 ### Visualizations
 
-All training metrics and visualizations are available in the repository:
+#### Training Metrics Overview
 
-#### 📁 `training_metrics_from_ckpt/`
-- `metrics_overview.png` - 2×2 grid of all metrics
-- `train_loss.png` - Training loss curve
-- `test_loss.png` - Test loss curve
-- `train_acc.png` - Training accuracy curve
-- `test_acc.png` - Test accuracy curve
-- `metrics_from_ckpt.csv` - Raw metrics data
-- `metrics_from_ckpt.npz` - NumPy arrays for analysis
+Complete training metrics showing loss and accuracy progression across all 166 epochs:
 
-#### 📁 `gradcam_outputs/`
-- `gradcam_grid.png` - 2×3 grid of GradCAM visualizations
-- `gradcam_idx[0-5]_overlay.png` - Individual class activation maps
+![Training Metrics Overview](training_metrics_from_ckpt/metrics_overview.png)
 
-**GradCAM** visualizations show which regions of the image the model focuses on when making predictions, providing interpretability for the model's decisions.
+The 2×2 grid shows:
+- **Top Left**: Training Loss - Smooth convergence with minimal oscillation
+- **Top Right**: Test Loss - Consistent decrease with OneCycleLR schedule
+- **Bottom Left**: Training Accuracy - Steady improvement to 76.24%
+- **Bottom Right**: Test Accuracy - Final achievement of **75.14%** 🎯
+
+#### Individual Metric Plots
+
+<details>
+<summary>Click to expand individual plots</summary>
+
+##### Training Loss
+![Training Loss](training_metrics_from_ckpt/train_loss.png)
+
+##### Test Loss
+![Test Loss](training_metrics_from_ckpt/test_loss.png)
+
+##### Training Accuracy
+![Training Accuracy](training_metrics_from_ckpt/train_acc.png)
+
+##### Test Accuracy
+![Test Accuracy](training_metrics_from_ckpt/test_acc.png)
+
+</details>
+
+#### GradCAM Visualizations
+
+**GradCAM** (Gradient-weighted Class Activation Mapping) visualizations show which regions of the image the model focuses on when making predictions. The heatmaps overlay indicates areas of high importance (red/yellow) vs low importance (blue/purple).
+
+![GradCAM Visualizations](gradcam_outputs/gradcam_grid.png)
+
+The visualization grid shows 6 sample predictions with:
+- **Left**: Original CIFAR-100 image (32×32 pixels)
+- **Right**: GradCAM heatmap overlay showing model attention
+- **Labels**: Predicted class and true class
+
+**Key Observations**:
+- Model correctly focuses on relevant object features
+- Attention maps align well with human-interpretable regions
+- Strong activation in areas corresponding to the target class
+
+<details>
+<summary>Click to see individual GradCAM examples</summary>
+
+| Sample 1 | Sample 2 |
+|----------|----------|
+| ![GradCAM 0](gradcam_outputs/gradcam_idx0_overlay.png) | ![GradCAM 1](gradcam_outputs/gradcam_idx1_overlay.png) |
+
+| Sample 3 | Sample 4 |
+|----------|----------|
+| ![GradCAM 2](gradcam_outputs/gradcam_idx2_overlay.png) | ![GradCAM 3](gradcam_outputs/gradcam_idx3_overlay.png) |
+
+| Sample 5 | Sample 6 |
+|----------|----------|
+| ![GradCAM 4](gradcam_outputs/gradcam_idx4_overlay.png) | ![GradCAM 5](gradcam_outputs/gradcam_idx5_overlay.png) |
+
+</details>
+
+#### 📁 Files Available
+- `training_metrics_from_ckpt/` - All training metrics and plots
+  - `metrics_overview.png` - 2×2 grid of all metrics
+  - `train_loss.png`, `test_loss.png`, `train_acc.png`, `test_acc.png` - Individual plots
+  - `metrics_from_ckpt.csv` - Raw metrics data
+  - `metrics_from_ckpt.npz` - NumPy arrays for analysis
+- `gradcam_outputs/` - GradCAM visualizations
+  - `gradcam_grid.png` - 2×3 grid of visualizations
+  - `gradcam_idx[0-5]_overlay.png` - Individual class activation maps
 
 ## 🔍 Key Improvements Over Baseline
 
